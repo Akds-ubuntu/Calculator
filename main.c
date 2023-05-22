@@ -80,7 +80,7 @@ struct opred pop(struct Node** top)        // удалить в начале
     // проверка на опустошение stack
     if (*top == NULL)
     {
-        printf("вы ввели что то странное\n");
+       // printf("вы ввели что то странное\n");
         exit(EXIT_FAILURE);
     }
 
@@ -152,6 +152,12 @@ void maths(struct Node** Stack_s, struct Node** Stack_h,struct opred *item)//ф�
             (*item).value=c ;
             push(Stack_h,*item);
             break;
+        case 's':
+            c=Sin(a);
+            (*item).type='0';
+            (*item).value=c ;
+            push(Stack_h,*item);
+            break;
     }
 }
 int getRang(char ch)//функция которая устанавливает приоритет операциям
@@ -159,6 +165,7 @@ int getRang(char ch)//функция которая устанавливает �
     if ((ch=='+')||(ch=='-'))return 1;
     if ((ch=='*')||(ch=='/'))return 2;
     if (ch=='^')return 3;
+    if(ch=='s')return 4;
     else return 0;
 }
 
@@ -209,6 +216,15 @@ int main(){
                         number[0]='\0';
                         
                     }
+                }
+                if(number[0]=='\0'){
+                    value=0;
+                    tip.type='0';
+                    tip.value=value;
+                    push(&Stack_h,tip);
+                    printf("Stack_h=%lf\n",peek(Stack_h).value);
+
+                    
                 }
                 if(unknow[0]!='\0'){
                     if(unknow[0]=='E'&&unknow[1]=='\0'){
